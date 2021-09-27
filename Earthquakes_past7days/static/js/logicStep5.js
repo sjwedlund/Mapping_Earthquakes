@@ -18,17 +18,14 @@ let baseMaps = {
     "Streets": streets,
     "Satellite Streets": satelliteStreets, 
 };
-
 // Create the map object with center, zoom level and default layer United States
 let map = L.map('mapid', {
     center: [39.5, -98.5],
     zoom: 3,
     layers: [streets]
 }); 
-
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
-
 // Retrieve the earthquake GeoJSON data.
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
   // Creating a GeoJSON layer with the retrieved data.
@@ -46,7 +43,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
             layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
             }
     }).addTo(map);
-
     // Create a legend control object
     let legend = L.control({
         position: 'bottomright'
@@ -55,15 +51,15 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
     legend.onAdd = function () {
         let div = L.DomUtil.create('div', 'info legend');
     };
-            const magnitudes = [0, 1, 2, 3, 4, 5];
-            const colors = [
-                "#98ee00",
-                "#d4ee00",
-                "#eecc00",
-                "#ee9c00",
-                "#ea822c",
-                "#ea2c2c"
-            ];
+        const magnitudes = [0, 1, 2, 3, 4, 5];
+        const colors = [
+            "#98ee00",
+            "#d4ee00",
+            "#eecc00",
+            "#ee9c00",
+            "#ea822c",
+            "#ea2c2c"
+        ];
         // loop through our intervals and generate a label with 
         // a colored square for each interval
         for (var i = 0; i < magnitudes.length; i++) {
@@ -75,7 +71,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
         return div;
     }); 
     legend.addTo(map);
-
     // This function returns the style data for each of the earthquakes we plot on
     // the map. We pass the magnitude of the earthquake into a function
     // to calculate the radius.
@@ -116,6 +111,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
             return "#d4ee00";
             }
             return "#98ee00";
-        }
+        };
   
 
